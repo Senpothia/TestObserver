@@ -6,15 +6,26 @@
 
 package testobserver;
 
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JLabel;
+
 /**
  *
  * @author michel
  */
-public class Interface extends javax.swing.JFrame {
+public class Interface extends javax.swing.JFrame implements Observer{
 
-    /** Creates new form Interface */
+    private CounterJob counterJob;
+    private Thread thread;
+    
+    
+    private int compteur =0;
+    
+    
     public Interface() {
         initComponents();
+      
     }
 
   
@@ -62,5 +73,50 @@ public class Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+       
+        this.getjLabel1().setText((String) arg);
+        
+    }
+
+    public CounterJob getCounterJob() {
+      
+        if (this.counterJob == null) {
+	this.counterJob = new CounterJob();
+        this.counterJob.addObserver(this.compteur);
+	
+	}
+	return this.counterJob;
+    }
+
+    public void setCounterJob(CounterJob counterJob) {
+        this.counterJob = counterJob;
+    }
+
+    public int getCompteur() {
+        return compteur;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public Thread getThread() {
+        
+        if (this.thread == null) {
+		this.setThread(new Thread(this.getCounterJob()));
+	}
+	return thread;
+      
+    }
+
+    private void setThread(Thread thread) {
+       
+        this.thread = thread;
+    }
+    
+    
 
 }
