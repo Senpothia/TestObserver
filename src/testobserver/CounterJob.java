@@ -6,6 +6,8 @@
 package testobserver;
 
 import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JFrame;
 
 /**
  *
@@ -43,8 +45,15 @@ public class CounterJob extends Observable implements Runnable {
         
     }
 
-    void addObserver(int compteur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public synchronized void addObserver(Observer o) {
+        super.addObserver(o); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+
+   
+      
+    
     
 }

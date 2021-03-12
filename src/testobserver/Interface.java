@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package testobserver;
 
@@ -10,10 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JLabel;
 
-/**
- *
- * @author michel
- */
+
 public class Interface extends javax.swing.JFrame implements Observer{
 
     private CounterJob counterJob;
@@ -25,6 +18,9 @@ public class Interface extends javax.swing.JFrame implements Observer{
     
     public Interface() {
         initComponents();
+        this.thread = getThread();
+        thread.start();
+        
       
     }
 
@@ -77,7 +73,7 @@ public class Interface extends javax.swing.JFrame implements Observer{
     @Override
     public void update(Observable o, Object arg) {
        
-        this.getjLabel1().setText((String) arg);
+        this.getjLabel1().setText((String) String.valueOf(arg));
         
     }
 
@@ -85,7 +81,7 @@ public class Interface extends javax.swing.JFrame implements Observer{
       
         if (this.counterJob == null) {
 	this.counterJob = new CounterJob();
-        this.counterJob.addObserver(this.compteur);
+        this.counterJob.addObserver(this);
 	
 	}
 	return this.counterJob;
